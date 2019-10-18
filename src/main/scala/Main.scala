@@ -8,5 +8,7 @@ object Main extends App {
         t.start
         t
     }
+
+    println("Hello World")
   
 }

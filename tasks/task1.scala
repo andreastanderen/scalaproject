@@ -1,10 +1,20 @@
+// --------------------------- TASK 1A ---------------------------
+//
 
-object Main extends App {
-  println("hello world 2");
-  def append(list: List[String]), new_element: Int): List[Int] = {
-    list match {
-      case Nil => List(new_element)
-      case x :: xs => x::append(xs, new_element)
+object ForLoop {
+
+  val for_loop = (start: Int, end: Int) =>
+    var mylist = new Array[Int](end);
+    for( a <- start to end){
+      mylist(a-1) = a;
+      println(mylist(a-1));
     }
+
+  val sum_list = ()
   }
+}
+
+object SumElInList{
+
+  def main(args: )
 }
