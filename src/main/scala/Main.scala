@@ -1,4 +1,3 @@
-
 object Main extends App {
 
     def thread(body: => Unit): Thread = {
@@ -6,7 +5,7 @@ object Main extends App {
             override def run() = body
         }
         t.start
-        t
+
     }
   
 }
