@@ -1,4 +1,7 @@
+// --------------------------- TASK 1A ---------------------------
+//
 
+<<<<<<< HEAD
 object Main extends App {
   val x = List.range(0, 10)
   val test = new Concurrency("hei")
@@ -19,4 +22,12 @@ object Main extends App {
   thread6.start()
   // RACE CONDITION
   // Added synchronized
+
+  val for_loop = (start: Int, end: Int) =>
+    var mylist = new Array[Int](end);
+    for( a <- start to end){
+      mylist(a-1) = a;
+      println(mylist(a-1));
+    }
 }
+
