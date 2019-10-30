@@ -1,7 +1,6 @@
 // --------------------------- TASK 1A ---------------------------
 //
 
-<<<<<<< HEAD
 object Main extends App {
   val x = List.range(0, 10)
   val test = new Concurrency("hei")

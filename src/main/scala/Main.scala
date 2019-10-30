@@ -5,7 +5,6 @@ object Main extends App {
             override def run() = body
         }
         t.start
-
     }
 
     println("Hello World")

@@ -1,5 +1,6 @@
 class Concurrency(val test: String="heisann"){
   private var counter: Int = 0
+
   def printCount():Unit = {
     println(counter)
   }
