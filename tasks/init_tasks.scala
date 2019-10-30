@@ -103,13 +103,31 @@ object Main extends App {
 
   // --------------------------- TASK 2D ---------------------------
 
-  println((new Z).Y)
 
-  class Z {
-    lazy val X = 2
-    lazy val Y = X + 1
-    println(Y)
+  object test1 {
+    lazy val number = 42;
+    lazy val problem = test2.number;
   }
+
+  object test2 {
+    lazy val number = test1.number;
+  }
+
+
+  val deadlock1 = new Thread {
+    override def run: Unit = {
+      test1.problem
+    }
+  }
+
+  val deadlock2 = new Thread{
+    override def run: Unit ={
+      test2.number
+    }
+  }
+
+  //deadlock1.start()
+  //deadlock2.start()
 }
 
 
