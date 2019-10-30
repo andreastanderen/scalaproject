@@ -4,7 +4,7 @@ object Main extends App {
         val t = new Thread {
             override def run() = body
         }
-        t.start
+        t
     }
 
     println("Hello World")

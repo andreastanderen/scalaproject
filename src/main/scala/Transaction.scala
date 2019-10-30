@@ -7,40 +7,45 @@ object TransactionStatus extends Enumeration {
 
 class TransactionQueue {
 
-    private var Queue = new ArrayBuffer[Transactions]()
+    private var Queue = new mutable.ArrayBuffer[Transaction]()
     // TODO
     // project task 1.1
     // Add datastructure to contain the transactions
 
     // Remove and return the first element from the queue
     def pop: Transaction = {
-      synchronized{
+      this.synchronized{
         var value = Queue(0)
-        Queue -= value
+        Queue - value
+        value
       }
     }
     
 
     // Return whether the queue is empty
     def isEmpty: Boolean = {
-      Queue.length() == 0
+      Queue.length == 0
     }
 
     // Add new element to the back of the queue
     def push(t: Transaction): Unit = {
-      synchronized{
+      this.synchronized{
         Queue += t
       }
     }
 
     // Return the first element from the queue without removing it
     def peek: Transaction = {
-      Queue(0)
+      this.synchronized{
+        Queue(0)
+      }
     }
 
     // Return an iterator to allow you to iterate over the queue
     def iterator: Iterator[Transaction] = {
-      Queue.iterator()
+      this.synchronized{
+        Queue.iterator
+      }
     }
 }
 
@@ -54,14 +59,20 @@ class Transaction(val transactionsQueue: TransactionQueue,
   var status: TransactionStatus.Value = TransactionStatus.PENDING
   var attempt = 0
 
-  override def run: Unit = {
+  override def run: Either = {
 
-      def doTransaction() = {
-          // TODO - project task 3
-          // Extend this method to satisfy requirements.
-          from withdraw amount
-          to deposit amount
-      }
+    def doTransaction() = {
+      val res_to = from.withdraw(amount)
+      if val.isLeft{
+        val res_to = to.deposit(amount)
+        if (res_to.isRight){
+          processedTransactions.push(this)
+        }
+        } else{
+          processedTransactions.push(this)
+        }
+
+    }
 
       // TODO - project task 3
       // make the code below thread safe
