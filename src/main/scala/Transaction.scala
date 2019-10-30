@@ -59,19 +59,19 @@ class Transaction(val transactionsQueue: TransactionQueue,
   var status: TransactionStatus.Value = TransactionStatus.PENDING
   var attempt = 0
 
-  override def run: Either = {
+  override def run= {
 
     def doTransaction() = {
       val res_to = from.withdraw(amount)
-      if val.isLeft{
+L     /*if(val.isLeft){
         val res_to = to.deposit(amount)
         if (res_to.isRight){
           processedTransactions.push(this)
         }
-        } else{
-          processedTransactions.push(this)
-        }
-
+      }else{
+      processedTransactions.push(this)
+      }
+       */
     }
 
       // TODO - project task 3
@@ -81,7 +81,6 @@ class Transaction(val transactionsQueue: TransactionQueue,
           Thread.sleep(50) // you might want this to make more room for
                            // new transactions to be added to the queue
       }
-
 
     }
 }
