@@ -6,7 +6,33 @@ object Main extends App {
         }
         t
     }
-
-    println("Hello World")
-  
+    val bank:Bank = new Bank
+    val acc = new Account(bank, 500)
+    val acc2= new Account(bank, 500)
+    bank.addTransactionToQueue(acc, acc2, 200)
+    bank.addTransactionToQueue(acc2, acc, 200)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
+    println(acc.balance.amount)
+    println(acc2.balance.amount)
 }

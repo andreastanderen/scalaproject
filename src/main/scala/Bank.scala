@@ -2,13 +2,13 @@ class Bank(val allowedAttempts: Integer = 3) {
 
     private val transactionsQueue: TransactionQueue = new TransactionQueue()
     private val processedTransactions: TransactionQueue = new TransactionQueue()
+    val threads: Thread =  
+
 
     def addTransactionToQueue(from: Account, to: Account, amount: Double): Unit = {
       val transaction = new Transaction(transactionsQueue, processedTransactions, from, to, amount, allowedAttempts)
       transactionsQueue.push(transaction)
-      Main.thread{
-        processTransactions
-      }
+      processTransactions
     }
                                                 // TODO
                                                 // project task 2
@@ -16,18 +16,9 @@ class Bank(val allowedAttempts: Integer = 3) {
                                                 // spawn a thread that calls processTransactions
 
     private def processTransactions: Unit = {
-      val transaction = transactionsQueue.pop
-      transactionsQueue.iterator.foreach{
-        (el) =>{
-          var res = el.run
-          if (res.isLeft){
-            processedTransactions.push(el)
-            el.status = TransactionStatus.FAILED
-          } else{
-            processedTransactions.push(el)
-            el.status = TransactionStatus.SUCCESS
-          }
-        }
+	  while (!this.transactionsQueue.isEmpty){
+          val transaction = this.transactionsQueue.pop
+          val t = new Thread(transaction).start
       }
     }
                                                 // TOO
