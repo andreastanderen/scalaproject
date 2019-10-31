@@ -18,13 +18,6 @@ class Bank(val allowedAttempts: Integer = 3) {
 	  while (!this.transactionsQueue.isEmpty){
           val transaction = this.transactionsQueue.pop
           val t:Thread = new Thread(transaction)
-          t.start()
-          t.join()
-          if (transaction.status == TransactionStatus.PENDING){
-            this.transactionsQueue.push(transaction)
-          } else{
-            this.processedTransactions.push(transaction)
-          }
       }
     }
                                                 // TOO

@@ -68,7 +68,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
           if (res_from.isLeft){
             val res_to = to.deposit(amount)
             this.status = TransactionStatus.SUCCESS
-            t = this.transactionsQueue.pop
+            val t = this.transactionsQueue.pop
             this.processedTransactions.push(t)
           }
 
