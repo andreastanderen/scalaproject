@@ -6,8 +6,7 @@ object TransactionStatus extends Enumeration {
 }
 
 class TransactionQueue {
-
-    private var Queue = new mutable.ArrayBuffer[Transaction]()
+private var Queue = new mutable.ArrayBuffer[Transaction]()
     // TODO
     // project task 1.1
     // Add datastructure to contain the transactions
@@ -68,7 +67,7 @@ class Transaction(val transactionsQueue: TransactionQueue,
             this.status = TransactionStatus.SUCCESS
             this.processedTransactions.push(this)
           }else{
-            transactionsQueue.push(this)
+            this.transactionsQueue.push(this)
           }
       }
       // TODO - project task 3
