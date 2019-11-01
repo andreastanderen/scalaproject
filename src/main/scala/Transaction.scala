@@ -6,7 +6,7 @@ object TransactionStatus extends Enumeration {
 }
 
 class TransactionQueue {
-private var Queue = new mutable.ArrayBuffer[Transaction]()
+private var Queue = new mutable.Queue[Transaction]()
     // TODO
     // project task 1.1
     // Add datastructure to contain the transactions
@@ -14,9 +14,7 @@ private var Queue = new mutable.ArrayBuffer[Transaction]()
     // Remove and return the first element from the queue
     def pop: Transaction = {
       this.synchronized{
-        var value = this.Queue(0)
-        this.Queue -= value
-        value
+        this.Queue.dequeue()
       }
     }
     
@@ -31,13 +29,13 @@ private var Queue = new mutable.ArrayBuffer[Transaction]()
     // Add new element to the back of the queue
     def push(t: Transaction): Unit = {
       this.synchronized{
-        this.Queue += t
+        this.Queue.enqueue(t)
       } }
 
     // Return the first element from the queue without removing it
     def peek: Transaction = {
       this.synchronized{
-        this.Queue(0)
+        this.Queue.head
       }
     }
 
