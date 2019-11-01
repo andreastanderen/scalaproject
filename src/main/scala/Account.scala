@@ -18,7 +18,7 @@ class Account(val bank: Bank, initialBalance: Double) {
     def deposit (amount: Double): Either[Double, String] =
       this.synchronized{
         if (amount < 0){
-          Right("Something went wrong")
+         Right("Something went wrong")
         }
         else{
           this.balance.amount += amount

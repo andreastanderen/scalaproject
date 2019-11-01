@@ -10,14 +10,14 @@ object Main extends App {
     val bank:Bank = new Bank
     val acc = new Account(bank, 500)
     val acc2= new Account(bank, 500)
-    println(acc.balance.amount)
+    //println(acc.balance.amount)
 
     val bank2 = new Bank()
 
     val acc3 = bank2.addAccount(100)
     val acc4 = bank2.addAccount(200)
 
-    acc3 transferTo(acc4, -50)
+    acc3.transferTo(acc4, -50)
 
     while (bank2.getProcessedTransactionsAsList.size != 1) {
       Thread.sleep(100)

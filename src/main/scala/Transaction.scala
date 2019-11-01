@@ -65,21 +65,14 @@ class Transaction(val transactionsQueue: TransactionQueue,
           if (res_from.isLeft) {
             val res_to = to.deposit(amount)
             this.status = TransactionStatus.SUCCESS
-            //this.processedTransactions.push(this)
           }
-            //this.transactionsQueue.push(this)
       }
-      // TODO - project task 3
-      // make the code below thread safe
 
-      //if (this.status == TransactionStatus.PENDING && this.attempt < this.allowedAttemps) {
-        //doTransaction
-        //Thread.sleep(50) // you might want this to make more room for
-        // new transactions to be added to the queue
-      //}
-      //else {
-        //this.status = TransactionStatus.FAILED
-        //this.processedTransactions.push(this)
-     // }
+      if (this.attempt < this.allowedAttemps){
+          doTransaction
+          Thread.sleep(50) // you might want this to make more room for
+        } else{
+          this.status = TransactionStatus.FAILED
+        }
     }
   }

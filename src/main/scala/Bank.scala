@@ -20,7 +20,7 @@ class Bank(val allowedAttempts: Integer = 3) {
 	  while (!this.transactionsQueue.isEmpty){
       val transaction = this.transactionsQueue.pop
       val t:Thread = Main.thread {
-        if (transaction.status == TransactionStatus.PENDING && transaction.attempt < transaction.allowedAttemps) {
+        if (transaction.status == TransactionStatus.PENDING ){
           transaction.run
           Thread.sleep(50)
         }
@@ -34,12 +34,6 @@ class Bank(val allowedAttempts: Integer = 3) {
       }
       }
     }
-                                                // TOO
-                                                // project task 2
-                                                // Function that pops a transaction from the queue
-                                                // and spawns a thread to execute the transaction.
-                                                // Finally do the appropriate thing, depending on whether
-                                                // the transaction succeeded or not
 
     def addAccount(initialBalance: Double): Account = {
         new Account(this, initialBalance)
