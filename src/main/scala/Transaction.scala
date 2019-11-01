@@ -23,7 +23,9 @@ private var Queue = new mutable.ArrayBuffer[Transaction]()
 
     // Return whether the queue is empty
     def isEmpty: Boolean = {
-      this.Queue.isEmpty
+      this.synchronized{
+        this.Queue.isEmpty
+      }
     }
 
     // Add new element to the back of the queue
@@ -60,19 +62,21 @@ class Transaction(val transactionsQueue: TransactionQueue,
     override def run = {
 
       def doTransaction() = {
-          this.attempt += 1
-          val res_from = from.withdraw(amount)
-          if (res_from.isLeft) {
-            val res_to = to.deposit(amount)
-            this.status = TransactionStatus.SUCCESS
-          }
+        this.attempt += 1
+        val res_from = from.withdraw(amount)
+        if (res_from.isLeft) {
+          val res_to = to.deposit(amount)
+          this.status = TransactionStatus.SUCCESS
+        }
       }
 
-      if (this.attempt < this.allowedAttemps){
+      this.synchronized{
+        if (this.attempt < this.allowedAttemps){
           doTransaction
           Thread.sleep(50) // you might want this to make more room for
         } else{
           this.status = TransactionStatus.FAILED
         }
+      }
     }
   }
