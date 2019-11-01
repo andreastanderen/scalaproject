@@ -11,4 +11,18 @@ object Main extends App {
     val acc = new Account(bank, 500)
     val acc2= new Account(bank, 500)
     println(acc.balance.amount)
+
+    val bank2 = new Bank()
+
+    val acc3 = bank.addAccount(100)
+    val acc4 = bank.addAccount(200)
+
+    acc3 transferTo(acc4, 50)
+
+    while (bank2.getProcessedTransactionsAsList.size != 1) {
+      Thread.sleep(100)
+    }
+    println(acc3.getBalanceAmount)
+    println(acc4.getBalanceAmount)
+
 }

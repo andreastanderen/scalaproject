@@ -31,8 +31,7 @@ class TransactionQueue {
     def push(t: Transaction): Unit = {
       this.synchronized{
         this.Queue += t
-      }
-    }
+      } }
 
     // Return the first element from the queue without removing it
     def peek: Transaction = {
@@ -62,17 +61,15 @@ class Transaction(val transactionsQueue: TransactionQueue,
     override def run = {
 
       def doTransaction() = {
-        this.synchronized{
           this.attempt += 1
           val res_from = from.withdraw(amount)
           if (res_from.isLeft){
             val res_to = to.deposit(amount)
             this.status = TransactionStatus.SUCCESS
-            val t = this.transactionsQueue.pop
-            this.processedTransactions.push(t)
+            this.processedTransactions.push(this)
+          }else{
+            transactionsQueue.push(this)
           }
-
-        }
       }
       // TODO - project task 3
       // make the code below thread safe

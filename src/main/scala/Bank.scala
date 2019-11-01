@@ -18,6 +18,7 @@ class Bank(val allowedAttempts: Integer = 3) {
 	  while (!this.transactionsQueue.isEmpty){
           val transaction = this.transactionsQueue.pop
           val t:Thread = new Thread(transaction)
+          t.start
       }
     }
                                                 // TOO

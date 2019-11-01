@@ -4,8 +4,7 @@ class Account(val bank: Bank, initialBalance: Double) {
 
     class Balance(var amount: Double) {}
 
-    val balance = new Balance(initialBalance)
-
+    val balance = new Balance(initialBalance) 
     def withdraw(amount: Double): Either[Double,String] =
       this.synchronized{
         if(amount < 0 || amount > this.getBalanceAmount){
