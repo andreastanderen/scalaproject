@@ -17,10 +17,9 @@ object Main extends App {
     val acc3 = bank2.addAccount(100)
     val acc4 = bank2.addAccount(200)
 
-    acc3 transferTo(acc4, 50)
+    acc3 transferTo(acc4, -50)
 
     while (bank2.getProcessedTransactionsAsList.size != 1) {
-      println(bank2.getProcessedTransactionsAsList.size)
       Thread.sleep(100)
     }
     println(acc3.getBalanceAmount)

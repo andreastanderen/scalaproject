@@ -1,3 +1,5 @@
+import javax.sql.rowset.spi.TransactionalWriter
+
 class Bank(val allowedAttempts: Integer = 3) {
 
     private val transactionsQueue: TransactionQueue = new TransactionQueue()
@@ -16,9 +18,20 @@ class Bank(val allowedAttempts: Integer = 3) {
 
     private def processTransactions: Unit = {
 	  while (!this.transactionsQueue.isEmpty){
-          val transaction = this.transactionsQueue.pop
-          val t:Thread = new Thread(transaction)
-          t.start
+      val transaction = this.transactionsQueue.pop
+      val t:Thread = Main.thread {
+        if (transaction.status == TransactionStatus.PENDING && transaction.attempt < transaction.allowedAttemps) {
+          transaction.run
+          Thread.sleep(50)
+        }
+        if (transaction.status == TransactionStatus.SUCCESS || transaction.status == TransactionStatus.FAILED) {
+          this.processedTransactions.push(transaction)
+        }
+        else{
+          this.transactionsQueue.push(transaction)
+          processTransactions
+        }
+      }
       }
     }
                                                 // TOO
