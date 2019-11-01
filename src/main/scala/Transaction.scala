@@ -14,6 +14,9 @@ private var Queue = new mutable.Queue[Transaction]()
     // Remove and return the first element from the queue
     def pop: Transaction = {
       this.synchronized{
+        while (isEmpty) {
+          wait()
+        }
         this.Queue.dequeue()
       }
     }
@@ -30,6 +33,7 @@ private var Queue = new mutable.Queue[Transaction]()
     def push(t: Transaction): Unit = {
       this.synchronized{
         this.Queue.enqueue(t)
+        notifyAll()
       } }
 
     // Return the first element from the queue without removing it
